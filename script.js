@@ -1,4 +1,4 @@
-async function displayFileContent2(fileId) {
+async function displayFileContent(fileId) {
     const file = await db.files.get(fileId);
     if (!file) {
         console.error('File not found in the database');
