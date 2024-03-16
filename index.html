@@ -75,7 +75,7 @@
         
         const db = new Dexie('nunuan');
         db.version(1).stores({
-            files: '++id, name, type, size, content, lines, originalContent, removedButtons',
+            files: '++id, name, type, size, lines',
             fileInstances: '++id, originalFileId, customFileName, contentLines, removedLines'
         });
 
