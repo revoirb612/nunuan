@@ -47,35 +47,7 @@ function setupFileInputChangeEvent() {
                 console.error('The file is not a text/plain type.');
             }
         });
-        
-        Array.from(event.target.files).forEach(function (file) {
-            fileData.push({ file: file, lines: [], originalContent: [], removedButtons: [] });
-            var fileButton = createFileButton(file);
-            document.getElementById('fileButtons').appendChild(fileButton);
-        });
     });
-}
-
-function createFileButton(file) {
-    var button = document.createElement('button');
-    var fileNameWithoutExtension = file.name.replace(/\.[^/.]+$/, "");
-
-    var icon = document.createElement('i');
-    icon.className = 'fas fa-file-alt';
-
-    var textSpan = document.createElement('span');
-    textSpan.textContent = fileNameWithoutExtension;
-
-    button.appendChild(icon);
-    button.appendChild(textSpan);
-
-    button.onclick = function () {
-        displayFileContent(file);
-    };
-
-    button.classList.add('file-list-button');
-
-    return button;
 }
 
 function createFileButton2(fileId) {
