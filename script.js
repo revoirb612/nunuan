@@ -27,7 +27,7 @@ async function displayFileContent(fileId) {
     checkFileContentsContainer(); // Check and update message after adding content
 }
 
-// 파일 이름 만들기2
+// 파일 이름 만들기
 function createFileDetails(file) {
     var fileInputDiv = document.createElement('div');
     fileInputDiv.className = 'file-input';
