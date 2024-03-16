@@ -23,16 +23,14 @@ function setupFileInputChangeEvent() {
             if (file.type === 'text/plain') {
                 const reader = new FileReader();
                 reader.onload = async function(e) {
-                    // 파일의 내용을 읽은 후, 해당 내용을 content 필드에 저장합니다.
-                    const content = e.target.result;
+                    // 파일의 내용을 읽은 후, 해당 내용을 줄 단위로 lines 배열에 저장합니다.
+                    const lines = e.target.result.split(/\r\n|\n/); // 파일 내용을 줄 단위로 분리하여 배열로 저장
+
                     const fileDataToStore  = {
                         name: file.name,
                         type: file.type,
                         size: file.size,
-                        content: content, // 읽은 파일 내용
-                        lines: [], // 선택적으로 파일 내용을 줄 단위로 처리하여 저장할 수 있습니다.
-                        originalContent: [], // 추가 처리를 위한 원본 내용 저장소
-                        removedButtons: [] // 제거된 버튼 정보
+                        lines: lines // 줄 단위로 처리된 파일 내용
                     };
 
                     // IndexedDB에 파일 메타데이터와 내용을 저장하고, 생성된 ID를 가져옵니다.
@@ -40,7 +38,7 @@ function setupFileInputChangeEvent() {
 
                     // 생성된 fileId를 사용하여 UI에 파일 버튼 생성 및 추가
                     var fileButton = createFileButton(fileId); // fileId를 인자로 전달
-                    document.getElementById('fileButtons').appendChild(fileButton2);
+                    document.getElementById('fileButtons').appendChild(fileButton);
                 };
                 reader.readAsText(file); // 파일을 읽습니다.
             } else {
@@ -49,6 +47,7 @@ function setupFileInputChangeEvent() {
         });
     });
 }
+
 
 function createFileButton(fileId) {
     var button = document.createElement('button');
