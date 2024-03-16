@@ -1,14 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>File Storage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>누가 누가 안 했나 for Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@600&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/dexie@3.2.0/dist/dexie.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <input type="file" id="fileInput" />
-    <button onclick="uploadFile()">Upload File</button>
-    <hr>
-    <div id="fileList"></div>
+    <section>
+        <div id="sidebar" class="bg-dark">
+            <div id="counter">
+                <a href="https://hits.seeyoufarm.com">
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Frevoirb612.github.io%2FWhoSkippedIt%2F&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/>
+                </a>
+            </div>
+            <h4 class="py-3 text-primary">안녕하세요!</h4>
+            <h4 class="py-2">1. 템플릿 예시</h4>
+            <ul>
+                <li>
+                    <a href="#" onclick="downloadFile('학생 명렬표.txt', '학생1\n학생2\n학생3\n학생4\n학생5\n학생6\n학생7\n학생8\n학생9\n학생10')">학생 명렬표.txt</a>
+                </li>
+                <li>
+                    <a href="#" onclick="downloadFile('하루 루틴.txt', '안내장 회수\n숙제 검사\n하루 일과 공지\n학교종이 발송')">하루 루틴.txt</a>
+                </li>
+            </ul>
+            <h4 class="py-2">2. 내 템플릿 추가</h4>
+            <input type="file" id="fileInput" multiple>
+            <h6 class="py-6">&nbsp;</h6>
+            <h4 class="py-2">3. 복사본 생성하기</h4>
+            <div id="fileButtons"></div>
+            <h6 class="py-6">&nbsp;</h6>
+            <div>
+                <i class="fas fa-exclamation-triangle"></i> 복사본은 탭 종료 및 새로고침 시 삭제됩니다.
+            </div>
+            <div id="copyright">
+                &copy; 2023-2024<a href="https://revoirb612.notion.site/com-b57409d4fba84c17b29b13c2a90293d2?pvs=4" target="_blank"> 홍승일</a> All Rights Reserved.
+            </div>
+        </div>
+    
+        <button type="button" id="sidebarCollapse" class="btn">
+            <i class="fa fa-arrow-right" id="toggleIcon"></i>
+        </button>
+    </section>
+    
+    <main>
+        <div class="container-fluid" id="content">
+            <div id="main-content">
+                <div id="fileContentsContainer"></div>
+            </div>
+        </div>
+    </main>
+
+    <div class="floating-button">
+        <a href="https://indischool.com/boards/libClass/37370017" target="_blank">?</a>
+    </div>
+    
+    <script src="sidebar.js"></script>
+    <script src="extras.js"></script>
+    <script>
+        var fileData = [];
+        
+        const db = new Dexie('WhoSkippedIt');
+        db.version(1).stores({
+            files: '++id, name, type, size, content, lines, originalContent, removedButtons'
+        });
+
+        $(document).ready(function () {
+            toggleSidebar();
+        
+            $('#sidebarCollapse').on('click', function () {
+                toggleSidebar();
+            });
+        
+            // Initialize file input change event setup
+            setupFileInputChangeEvent();
+        
+            // Initialize sortable container
+            $("#fileContentsContainer").sortable();
+        
+            // Check if fileContentsContainer is empty and display a message if it is
+            checkFileContentsContainer();
+        });
+    </script>
+    <script src="onclick.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
