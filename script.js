@@ -9,11 +9,11 @@ async function displayFileContent2(fileId) {
     fileContentDiv.className = 'file-content';
 
     // 파일 이름 만들기
-    var fileDetails = createFileDetails2(file);
+    var fileDetails = createFileDetails(file);
     fileContentDiv.appendChild(fileDetails);
 
     // 명렬 버튼 만들기
-    var contentButtons = await createContentButtons2(file);
+    var contentButtons = await createContentButtons(file);
     contentButtons.className = 'content-buttons';
     fileContentDiv.appendChild(contentButtons);
 
@@ -28,7 +28,7 @@ async function displayFileContent2(fileId) {
 }
 
 // 파일 이름 만들기2
-function createFileDetails2(file) {
+function createFileDetails(file) {
     var fileInputDiv = document.createElement('div');
     fileInputDiv.className = 'file-input';
 
@@ -43,7 +43,7 @@ function createFileDetails2(file) {
     return fileInputDiv;
 }
 
-async function createContentButtons2(file) {
+async function createContentButtons(file) {
     var contentButtons = document.createElement('div');
     contentButtons.style.display = 'flex';
     contentButtons.style.flexDirection = 'row';
@@ -52,13 +52,13 @@ async function createContentButtons2(file) {
     // 파일 내용을 줄 단위로 나누고 각 줄에 대한 버튼 생성
     var items = file.content.split('\n');
     items.forEach(function(item) {
-        var itemButton = createItemButton2(item);
+        var itemButton = createItemButton(item);
         contentButtons.appendChild(itemButton);
     });
     return contentButtons;
 }
 
-function createItemButton2(item) {
+function createItemButton(item) {
     var itemContainer = document.createElement('div');
     itemContainer.style.display = 'flex';
 
