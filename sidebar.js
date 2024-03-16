@@ -66,7 +66,7 @@ function createFileButton(fileId) {
 
         // 버튼 클릭 이벤트: 클릭 시 IndexedDB에서 파일 내용을 검색하여 표시
         button.onclick = function () {
-            displayFileContent2(fileId); // 수정된 부분: 파일 객체 대신 fileId 사용
+            displayFileContent(fileId);
         };
 
         button.classList.add('file-list-button');
