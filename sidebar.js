@@ -39,7 +39,7 @@ function setupFileInputChangeEvent() {
                     const fileId = await db.files.add(fileDataToStore);
 
                     // 생성된 fileId를 사용하여 UI에 파일 버튼 생성 및 추가
-                    var fileButton2 = createFileButton2(fileId); // fileId를 인자로 전달
+                    var fileButton = createFileButton(fileId); // fileId를 인자로 전달
                     document.getElementById('fileButtons').appendChild(fileButton2);
                 };
                 reader.readAsText(file); // 파일을 읽습니다.
@@ -50,7 +50,7 @@ function setupFileInputChangeEvent() {
     });
 }
 
-function createFileButton2(fileId) {
+function createFileButton(fileId) {
     var button = document.createElement('button');
 
     // IndexedDB에서 fileId를 사용하여 파일 정보 검색
