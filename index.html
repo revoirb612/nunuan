@@ -72,7 +72,7 @@
     <script>
         var fileData = [];
         
-        const db = new Dexie('WhoSkippedIt');
+        const db = new Dexie('nunuan');
         db.version(1).stores({
             files: '++id, name, type, size, content, lines, originalContent, removedButtons'
         });
