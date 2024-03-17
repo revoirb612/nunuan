@@ -12,9 +12,8 @@ async function displayFileContent(instanceId) {
     var fileHeader = createFileHeader(instance.customFileName);
     fileContentDiv.appendChild(fileHeader);
 
-    /*
     // 명렬 버튼 만들기
-    var contentButtons = await createContentButtons(instance.contentLines);
+    var contentButtons = createContentButtons(instance.contentLines);
     contentButtons.className = 'content-buttons';
     fileContentDiv.appendChild(contentButtons);
 
@@ -22,7 +21,6 @@ async function displayFileContent(instanceId) {
     $(contentButtons).sortable({
         handle: '.drag-handle'
     });
-    */
     
     // 파일 내용을 표시
     document.getElementById('fileContentsContainer').appendChild(fileContentDiv);
@@ -45,22 +43,20 @@ function createFileHeader(customFileName) {
     return fileInputDiv;
 }
 
-async function createContentButtons(file) {
+async function createContentButtons(contentLines) {
     var contentButtons = document.createElement('div');
     contentButtons.style.display = 'flex';
     contentButtons.style.flexDirection = 'row';
     contentButtons.style.flexWrap = 'wrap';
 
-    // 파일 내용을 줄 단위로 나누고 각 줄에 대한 버튼 생성
-    var items = file.content.split('\n');
-    items.forEach(function(item) {
-        var itemButton = createItemButton(item);
-        contentButtons.appendChild(itemButton);
+    contentLines.forEach(function(line) {
+        var itemButton = createItemButton(line);
+        contentButtons.appendChild(lineButton);
     });
     return contentButtons;
 }
 
-function createItemButton(item) {
+function createItemButton(line) {
     var itemContainer = document.createElement('div');
     itemContainer.style.display = 'flex';
 
@@ -69,7 +65,7 @@ function createItemButton(item) {
     dragHandle.className = 'drag-handle';
 
     var button = document.createElement('button');
-    button.textContent = item;
+    button.textContent = line;
     button.className = 'item-button';
 
     // 아이템 삭제 로직이 필요한 경우 여기에 추가
