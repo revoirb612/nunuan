@@ -1,6 +1,6 @@
-async function displayFileContent(fileId) {
-    const file = await db.files.get(fileId);
-    if (!file) {
+async function displayFileContent(instanceId) {
+    const instance = await db.fileInstances.get(instanceId);
+    if (!instance) {
         console.error('File not found in the database');
         return;
     }
@@ -8,12 +8,12 @@ async function displayFileContent(fileId) {
     var fileContentDiv = document.createElement('div');
     fileContentDiv.className = 'file-content';
 
-    // 파일 이름 만들기
-    var fileDetails = createFileDetails(file);
-    fileContentDiv.appendChild(fileDetails);
+    // 헤더 만들기
+    var fileHeader = createFileHeader(instance.customFileName);
+    fileContentDiv.appendChild(fileHeader);
 
     // 명렬 버튼 만들기
-    var contentButtons = await createContentButtons(file);
+    var contentButtons = await createContentButtons(instance.contentLines);
     contentButtons.className = 'content-buttons';
     fileContentDiv.appendChild(contentButtons);
 
@@ -27,14 +27,14 @@ async function displayFileContent(fileId) {
     checkFileContentsContainer(); // Check and update message after adding content
 }
 
-// 파일 이름 만들기
-function createFileDetails(file) {
+// 헤더 만들기
+function createFileHeader(customFileName) {
     var fileInputDiv = document.createElement('div');
     fileInputDiv.className = 'file-input';
 
     var textInput = document.createElement('input');
     textInput.type = 'text';
-    textInput.value = file.name;
+    textInput.value = customFileName;
     textInput.className = 'file-name-input';
 
     // 파일 이름 변경 로직 필요시 여기에 추가
