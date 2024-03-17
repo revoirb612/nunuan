@@ -12,6 +12,7 @@ async function displayFileContent(instanceId) {
     var fileHeader = createFileHeader(instance.customFileName);
     fileContentDiv.appendChild(fileHeader);
 
+    /*
     // 명렬 버튼 만들기
     var contentButtons = await createContentButtons(instance.contentLines);
     contentButtons.className = 'content-buttons';
@@ -21,6 +22,7 @@ async function displayFileContent(instanceId) {
     $(contentButtons).sortable({
         handle: '.drag-handle'
     });
+    */
     
     // 파일 내용을 표시
     document.getElementById('fileContentsContainer').appendChild(fileContentDiv);
