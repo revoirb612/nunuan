@@ -49,29 +49,28 @@ function setupFileInputChangeEvent() {
 }
 
 
-function createFileButton(fileId) {
+async function createFileButton(fileId) {
     var button = document.createElement('button');
 
     // IndexedDB에서 fileId를 사용하여 파일 정보 검색
-    db.files.get(fileId).then(file => {
-        var fileNameWithoutExtension = file.name.replace(/\.[^/.]+$/, "");
-        var icon = document.createElement('i');
-        icon.className = 'fas fa-file-alt';
+    var file = await db.files.get(fileId);
+    var fileNameWithoutExtension = file.name.replace(/\.[^/.]+$/, "");
+    var icon = document.createElement('i');
+    icon.className = 'fas fa-file-alt';
 
-        var textSpan = document.createElement('span');
-        textSpan.textContent = fileNameWithoutExtension;
+    var textSpan = document.createElement('span');
+    textSpan.textContent = fileNameWithoutExtension;
 
-        button.appendChild(icon);
-        button.appendChild(textSpan);
+    button.appendChild(icon);
+    button.appendChild(textSpan);
 
-        // 버튼 클릭 이벤트: 클릭 시 IndexedDB에서 파일 내용을 검색하여 표시
-        button.onclick = function () {
-            var instanceId = createOrUpdateFileInstance(null, fileId, file.name, file.lines, []);
-            displayFileContent(instanceId);
-        };
+    // 버튼 클릭 이벤트: 클릭 시 IndexedDB에서 파일 내용을 검색하여 표시
+    button.onclick = async function () {
+        var instanceId = createOrUpdateFileInstance(null, fileId, file.name, file.lines, []);
+        await displayFileContent(instanceId);
+    };
 
-        button.classList.add('file-list-button');
-    });
+    button.classList.add('file-list-button');
 
     return button;
 }
