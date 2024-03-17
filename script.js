@@ -43,20 +43,20 @@ function createFileHeader(customFileName) {
     return fileInputDiv;
 }
 
-async function createContentButtons(contentLines) {
+function createContentButtons(contentLines) {
     var contentButtons = document.createElement('div');
     contentButtons.style.display = 'flex';
     contentButtons.style.flexDirection = 'row';
     contentButtons.style.flexWrap = 'wrap';
 
-    contentLines.forEach(function(line) {
-        var itemButton = createItemButton(line);
-        contentButtons.appendChild(lineButton);
+    contentLines.forEach(function(content) {
+        var contentButton = createContentButton(content);
+        contentButtons.appendChild(contentButton);
     });
     return contentButtons;
 }
 
-function createItemButton(line) {
+function createContentButton(content) {
     var itemContainer = document.createElement('div');
     itemContainer.style.display = 'flex';
 
@@ -65,7 +65,7 @@ function createItemButton(line) {
     dragHandle.className = 'drag-handle';
 
     var button = document.createElement('button');
-    button.textContent = line;
+    button.textContent = content;
     button.className = 'item-button';
 
     // 아이템 삭제 로직이 필요한 경우 여기에 추가
