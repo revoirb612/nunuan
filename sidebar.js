@@ -66,7 +66,7 @@ function createFileButton(fileId) {
 
         // 버튼 클릭 이벤트: 클릭 시 IndexedDB에서 파일 내용을 검색하여 표시
         button.onclick = function () {
-            var instanceId = await createOrUpdateFileInstance(null, fileId, file.name, file.lines, []);
+            var instanceId = createOrUpdateFileInstance(null, fileId, file.name, file.lines, []);
             displayFileContent(instanceId);
         };
 
