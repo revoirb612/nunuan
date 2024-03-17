@@ -64,13 +64,14 @@ function createFileButton(fileId) {
         button.appendChild(textSpan);
 
         // 버튼 클릭 이벤트: 클릭 시 IndexedDB에서 파일 내용을 검색하여 표시
-        button.onclick = function () {
-            var instanceId = createOrUpdateFileInstance(null, fileId, file.name, file.lines, []);
-            displayFileContent(instanceId).then(() => {
+        button.onclick = async function () { // async 키워드 추가
+            try {
+                var instanceId = await createOrUpdateFileInstance(null, fileId, file.name, file.lines, []); // await 키워드 사용
+                await displayFileContent(instanceId); // await 키워드 사용
                 console.log("File content displayed successfully");
-            }).catch((error) => {
+            } catch (error) {
                 console.error("Error displaying file content: ", error);
-            });
+            }
         };
 
         button.classList.add('file-list-button');
