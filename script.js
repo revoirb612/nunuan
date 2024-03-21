@@ -77,11 +77,7 @@ function createContentButton(content, instanceId) {
     var button = document.createElement('button');
     button.textContent = content;
     button.className = 'item-button';
-
-    var deleteButton = document.createElement('button');
-    deleteButton.textContent = 'X';
-    deleteButton.className = 'delete-button';
-    deleteButton.onclick = async function() {
+    button.onclick = async function() {
         try {
             // 인스턴스 데이터를 가져옴
             const instance = await db.fileInstances.get(instanceId);
@@ -106,9 +102,9 @@ function createContentButton(content, instanceId) {
 
     itemContainer.appendChild(dragHandle);
     itemContainer.appendChild(button);
-    itemContainer.appendChild(deleteButton);
     return itemContainer;
 }
+
 
 function createIconButtonContainer(fileIndex, contentButtons) {
     var iconButtonContainer = document.createElement('div');
