@@ -68,8 +68,6 @@
     <script src="instance.js"></script>
     <script src="extras.js"></script>
     <script>
-        var fileData = [];
-        
         const db = new Dexie('nunuan');
         db.version(1).stores({
             files: '++id, name, type, size, lines',
@@ -91,6 +89,9 @@
         
             // Check if fileContentsContainer is empty and display a message if it is
             checkFileContentsContainer();
+
+            // Load and create buttons for all files stored in the database
+            loadAndCreateFileButtons();
         });
     </script>
     <script src="onclick.js"></script>
