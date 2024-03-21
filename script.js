@@ -1,40 +1,43 @@
 async function displayFileContent(instanceId) {
-    const instance = await db.fileInstances.get(instanceId);
-    if (!instance) {
-        console.error('File not found in the database');
-        return;
-    }
-
-    var fileContentDiv = document.createElement('div');
+    const fileContentDiv = document.createElement('div');
     fileContentDiv.className = 'file-content';
 
     // 헤더 만들기
-    var fileHeader = createFileHeader(instance.customFileName);
-    fileContentDiv.appendChild(fileHeader);
+    var fileHeader = await createFileHeader(instanceId);
+    if (fileHeader) {
+        fileContentDiv.appendChild(fileHeader);
+    }
 
     // 명렬 버튼 만들기
-    var contentButtons = createContentButtons(instance.contentLines);
-    contentButtons.className = 'content-buttons';
-    fileContentDiv.appendChild(contentButtons);
+    var contentButtons = await createContentButtons(instanceId);
+    if (contentButtons) {
+        contentButtons.className = 'content-buttons';
+        fileContentDiv.appendChild(contentButtons);
 
-    // 명렬 버튼 이동 가능하게 만들기
-    $(contentButtons).sortable({
-        handle: '.drag-handle'
-    });
+        // 명렬 버튼 이동 가능하게 만들기
+        $(contentButtons).sortable({
+            handle: '.drag-handle'
+        });
+    }
     
     // 파일 내용을 표시
     document.getElementById('fileContentsContainer').appendChild(fileContentDiv);
     checkFileContentsContainer(); // Check and update message after adding content
 }
 
-// 헤더 만들기
-function createFileHeader(customFileName) {
+async function createFileHeader(instanceId) {
+    const instance = await db.fileInstances.get(instanceId);
+    if (!instance) {
+        console.error('File instance not found');
+        return null;
+    }
+
     var fileInputDiv = document.createElement('div');
     fileInputDiv.className = 'file-input';
 
     var textInput = document.createElement('input');
     textInput.type = 'text';
-    textInput.value = customFileName;
+    textInput.value = instance.customFileName;
     textInput.className = 'file-name-input';
 
     // 파일 이름 변경 로직 필요시 여기에 추가
@@ -43,16 +46,23 @@ function createFileHeader(customFileName) {
     return fileInputDiv;
 }
 
-function createContentButtons(contentLines) {
+async function createContentButtons(instanceId) {
+    const instance = await db.fileInstances.get(instanceId);
+    if (!instance) {
+        console.error('File instance not found');
+        return null;
+    }
+
     var contentButtons = document.createElement('div');
     contentButtons.style.display = 'flex';
     contentButtons.style.flexDirection = 'row';
     contentButtons.style.flexWrap = 'wrap';
 
-    contentLines.forEach(function(content) {
-        var contentButton = createContentButton(content);
+    instance.contentLines.forEach(function(content) {
+        var contentButton = createContentButton(content); // 이전에 정의한 createContentButton 사용
         contentButtons.appendChild(contentButton);
     });
+
     return contentButtons;
 }
 
