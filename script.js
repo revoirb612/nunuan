@@ -58,16 +58,15 @@ async function createContentButtons(instanceId) {
     contentButtons.style.flexDirection = 'row';
     contentButtons.style.flexWrap = 'wrap';
 
-    // forEach 반복문 내에서 인덱스를 전달하도록 수정
-    instance.contentLines.forEach(function(content, index) {
-        var contentButton = createContentButton(content, instanceId, index); // 수정된 createContentButton 사용
+    instance.contentLines.forEach(function(content) {
+        var contentButton = createContentButton(content, instanceId);
         contentButtons.appendChild(contentButton);
     });
 
     return contentButtons;
 }
 
-function createContentButton(content, instanceId, index) {
+function createContentButton(content, instanceId) {
     var itemContainer = document.createElement('div');
     itemContainer.style.display = 'flex';
 
@@ -92,7 +91,7 @@ function createContentButton(content, instanceId, index) {
             }
 
             // 삭제할 내용 라인을 contentLines에서 제거
-            const updatedContentLines = instance.contentLines.filter((_, idx) => idx !== index);
+            const updatedContentLines = instance.contentLines.filter(line => line !== content);
 
             // 파일 인스턴스 업데이트
             await createOrUpdateFileInstance(instanceId, instance.originalFileId, instance.customFileName, updatedContentLines, [...instance.removedLines, content]);
@@ -110,7 +109,6 @@ function createContentButton(content, instanceId, index) {
     itemContainer.appendChild(deleteButton);
     return itemContainer;
 }
-
 
 function createIconButtonContainer(fileIndex, contentButtons) {
     var iconButtonContainer = document.createElement('div');
