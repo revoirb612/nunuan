@@ -58,15 +58,16 @@ async function createContentButtons(instanceId) {
     contentButtons.style.flexDirection = 'row';
     contentButtons.style.flexWrap = 'wrap';
 
-    instance.contentLines.forEach(function(content) {
-        var contentButton = createContentButton(content); // 이전에 정의한 createContentButton 사용
+    // forEach 반복문 내에서 인덱스를 전달하도록 수정
+    instance.contentLines.forEach(function(content, index) {
+        var contentButton = createContentButton(content, instanceId, index); // 수정된 createContentButton 사용
         contentButtons.appendChild(contentButton);
     });
 
     return contentButtons;
 }
 
-function createContentButton(content) {
+function createContentButton(content, instanceId, index) {
     var itemContainer = document.createElement('div');
     itemContainer.style.display = 'flex';
 
@@ -78,12 +79,38 @@ function createContentButton(content) {
     button.textContent = content;
     button.className = 'item-button';
 
-    // 아이템 삭제 로직이 필요한 경우 여기에 추가
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = 'X';
+    deleteButton.className = 'delete-button';
+    deleteButton.onclick = async function() {
+        try {
+            // 인스턴스 데이터를 가져옴
+            const instance = await db.fileInstances.get(instanceId);
+            if (!instance) {
+                console.error('File instance not found');
+                return;
+            }
+
+            // 삭제할 내용 라인을 contentLines에서 제거
+            const updatedContentLines = instance.contentLines.filter((_, idx) => idx !== index);
+
+            // 파일 인스턴스 업데이트
+            await createOrUpdateFileInstance(instanceId, instance.originalFileId, instance.customFileName, updatedContentLines, [...instance.removedLines, content]);
+
+            // 페이지에서 아이템 컨테이너 삭제
+            itemContainer.remove();
+            console.log("Content line removed and instance updated.");
+        } catch (err) {
+            console.error("Failed to remove content line:", err);
+        }
+    };
 
     itemContainer.appendChild(dragHandle);
     itemContainer.appendChild(button);
+    itemContainer.appendChild(deleteButton);
     return itemContainer;
 }
+
 
 function createIconButtonContainer(fileIndex, contentButtons) {
     var iconButtonContainer = document.createElement('div');
