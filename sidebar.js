@@ -79,3 +79,14 @@ function createFileButton(fileId) {
 
     return button;
 }
+
+function loadAndCreateFileButtons() {
+    db.files.toArray().then(files => {
+        files.forEach(file => {
+            var button = createFileButton(file.id);
+            document.getElementById('fileListContainer').appendChild(button); // Assuming you have a container with this ID for the file buttons
+        });
+    }).catch(error => {
+        console.error("Error loading files: ", error);
+    });
+}
