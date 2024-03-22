@@ -265,6 +265,7 @@ body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
 }
 
 #copyrightContainer {
+    font-size: 14px; /* 폰트 크기 */
     user-select: none;
     position: fixed;
     bottom: 0;
