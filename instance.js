@@ -23,15 +23,3 @@ async function createOrUpdateFileInstance(instanceId, originalFileId, customFile
         throw err; // 에러 발생 시, 이를 호출한 곳으로 전파
     }
 }
-
-function recreateUIComponentsFromInstance(instanceId) {
-    db.fileInstances.get(instanceId).then(instance => {
-        if (!instance) {
-            console.error('Instance not found');
-            return;
-        }
-
-        // 여기에서 인스턴스 상태를 바탕으로 UI 컴포넌트 재생성 로직 구현
-        // 예: 인스턴스에 저장된 customFileName, contentLines 등을 사용
-    });
-}
