@@ -11,7 +11,9 @@ function downloadFile(filename, content) {
 }
 
 function createFileButton(fileId) {
+    var buttonContainer = document.createElement('div');
     var button = document.createElement('button');
+    var deleteButton = document.createElement('button');
 
     // IndexedDB에서 fileId를 사용하여 파일 정보 검색
     db.files.get(fileId).then(file => {
@@ -25,19 +27,34 @@ function createFileButton(fileId) {
         button.appendChild(icon);
         button.appendChild(textSpan);
 
-        // 버튼 클릭 이벤트: 클릭 시 IndexedDB에서 파일 내용을 검색하여 표시
-        button.onclick = async function () { // async 키워드 추가
+        // 파일 내용 표시 버튼 클릭 이벤트
+        button.onclick = async function () {
             try {
-                var instanceId = await createOrUpdateFileInstance(null, fileId, file.name, file.lines, []); // await 키워드 사용
-                await displayFileContent(instanceId); // await 키워드 사용
+                var instanceId = await createOrUpdateFileInstance(null, fileId, file.name, file.lines, []);
+                await displayFileContent(instanceId);
                 console.log("File content displayed successfully");
             } catch (error) {
                 console.error("Error displaying file content: ", error);
             }
         };
 
+        // 파일 삭제 버튼 설정
+        deleteButton.textContent = 'Delete';
+        deleteButton.className = 'delete-file-button';
+        deleteButton.onclick = async function() {
+            try {
+                await db.files.delete(fileId);
+                buttonContainer.remove(); // 화면에서 파일 버튼 컨테이너 삭제
+                console.log("File deleted successfully");
+            } catch (error) {
+                console.error("Error deleting file: ", error);
+            }
+        };
+
         button.classList.add('file-list-button');
+        buttonContainer.appendChild(button);
+        buttonContainer.appendChild(deleteButton); // 삭제 버튼을 버튼 컨테이너에 추가
     });
 
-    return button;
+    return buttonContainer; // buttonContainer 반환
 }
