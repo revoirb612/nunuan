@@ -1,5 +1,4 @@
 body, html {
-    margin: 0;
     font-family: 'Noto Sans KR', sans-serif;
     overflow-x: hidden; /* 가로 스크롤 비활성화 */
     height: auto; /* 내용에 따라 높이 조정 */
