@@ -84,6 +84,7 @@ function loadAndCreateFileButtons() {
     db.files.toArray().then(files => {
         files.forEach(file => {
             var button = createFileButton(file.id);
+            document.getElementById('fileButtons').appendChild(button);
         });
     }).catch(error => {
         console.error("Error loading files: ", error);
