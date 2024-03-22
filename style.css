@@ -261,3 +261,16 @@ body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
     text-align: center;
     z-index: 1000; /* 낮은 z-index 값으로 emptyContainerMessage를 하위 레이어에 위치시킴 */
 }
+
+#copyrightContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #f0f0f0; /* 배경색은 취향에 맞게 조정 가능 */
+    text-align: center;
+    padding: 10px 0; /* 상하 패딩 */
+    border-top: 1px solid #ccc; /* 상단에 경계선 추가 */
+    font-size: 14px; /* 폰트 크기 */
+    color: #666; /* 폰트 색상 */
+}
