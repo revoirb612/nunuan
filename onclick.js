@@ -1,11 +1,27 @@
-function addContent(fileIndex, contentButtons) {
+async function addContent(instanceId, contentButtons) {
     var newContent = prompt('추가할 내용을 입력하세요:');
     if (newContent) {
-        var itemButton = createItemButton(newContent, fileIndex);
+        // 화면에 새로운 내용 추가
+        var itemButton = createContentButton(newContent, instanceId); // 이 함수는 인스턴스 ID와 새로운 내용을 사용해야 합니다.
         contentButtons.appendChild(itemButton);
-        fileData[fileIndex].originalContent.push(newContent);
+
+        try {
+            // 데이터베이스에서 해당 인스턴스를 가져온다.
+            const instance = await db.fileInstances.get(instanceId);
+            if (instance) {
+                // 새로운 내용을 contentLines 배열에 추가
+                instance.contentLines.push(newContent);
+
+                // 데이터베이스에 변경사항 업데이트
+                await db.fileInstances.update(instanceId, { contentLines: instance.contentLines });
+                console.log("Content added successfully to the instance:", instanceId);
+            }
+        } catch (error) {
+            console.error("Error adding content to the instance:", error);
+        }
     }
 }
+
 
 function undoRemove(fileIndex, contentButtons) {
     var lastRemoved = fileData[fileIndex].removedButtons.pop();
