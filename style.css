@@ -269,6 +269,5 @@ body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
     right: 0;
     text-align: center;
     padding: 10px 0; /* 상하 패딩 */
-    border-top: 1px solid #ccc; /* 상단에 경계선 추가 */
-    font-size: 14px; /* 폰트 크기 */
+    z-index: 1000; /* 낮은 z-index 값으로 emptyContainerMessage를 하위 레이어에 위치시킴 */
 }
