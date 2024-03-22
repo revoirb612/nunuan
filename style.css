@@ -254,20 +254,24 @@ body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
 }
 
 #emptyContainerMessage {
+    user-select: none;
     position: fixed;
     top: 50%;
-    left: 50%;
+    left: 0;
+    right: 0;
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 1000; /* 낮은 z-index 값으로 emptyContainerMessage를 하위 레이어에 위치시킴 */
 }
 
 #copyrightContainer {
+    user-select: none;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     text-align: center;
+    border-top: 1px solid #ccc;
     padding: 10px 0; /* 상하 패딩 */
     z-index: 1000; /* 낮은 z-index 값으로 emptyContainerMessage를 하위 레이어에 위치시킴 */
 }
