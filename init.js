@@ -52,16 +52,35 @@ function setupFileInputChangeEvent() {
 function checkFileContentsContainer() {
     var container = $("#fileContentsContainer");
     if (container.children().length === 0) {
-        var emptyMessage = $('<div/>', {
-            id: 'emptyContainerMessage',
+        // 기존 메시지 제거
+        $('#emptyContainerMessage').remove();
+
+        // 새로운 메시지 및 버튼 컨테이너 생성
+        var emptyMessageContainer = $('<div/>', { id: 'emptyContainerMessage' });
+        var emptyMessageText = $('<div/>', {
             text: '누가 누가 안 했나 for Web'
         });
+        
+        // 더하기 버튼 생성
+        var addButton = $('<button/>', {
+            html: '<i class="fas fa-plus"></i>', // Font Awesome 아이콘 사용 예시
+            class: 'add-content-button', // 버튼 스타일링을 위한 클래스
+            click: function() {
+                // 클릭 이벤트 핸들러
+                // 현재는 아무 기능도 실행되지 않음
+            }
+        });
 
-        container.append(emptyMessage);
+        // 메시지 컨테이너에 텍스트 및 버튼 추가
+        emptyMessageContainer.append(emptyMessageText).append(addButton);
+
+        // 최종적으로 컨테이너에 메시지 컨테이너 추가
+        container.append(emptyMessageContainer);
     } else {
-        $('#emptyContainerMessage').remove();
+        $('#emptyContainerMessage').remove(); // 컨테이너에 내용이 있으면 메시지 제거
     }
 }
+
 
 function loadAndCreateFileButtons() {
     db.files.toArray().then(files => {
