@@ -131,14 +131,15 @@ function createIconButtonContainer(instanceId) {
     var buttonsInfo = [
         {icon: 'fa-plus', label: '내용 추가', onClick: () => addContent(instanceId)},
         {icon: 'fa-undo-alt', label: '되돌리기', onClick: () => undoRemove(instanceId)},
-        {icon: 'fa-file-export', label: '내보내기', onClick: () => exportToFile(instanceId)},  // exportToFile(contentButtons, fileData[fileIndex].file.name, fileIndex)
+        {icon: 'fa-clone', label: '복사하여 파일로 저장', onClick: () => cloneToFilesStore(instanceId)},
+        {icon: 'fa-file-export', label: '내보내기', onClick: () => exportToFile(instanceId)}, 
         {icon: 'fa-trash', label: '이 복사본 삭제', onClick: () => deleteFileContent(instanceId)},
     ];
 
     // Create an icon button
     function createIconButton(iconClass, title) {
         var button = document.createElement('button');
-        button.classList.add('icon-button'); // 여기에 클래스 추가
+        button.classList.add('icon-button');
         var icon = document.createElement('i');
         icon.className = 'fas ' + iconClass;
         button.appendChild(icon);
