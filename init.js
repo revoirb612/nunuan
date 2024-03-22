@@ -48,6 +48,21 @@ function setupFileInputChangeEvent() {
     });
 }
 
+// Function to check if fileContentsContainer is empty and display a message
+function checkFileContentsContainer() {
+    var container = $("#fileContentsContainer");
+    if (container.children().length === 0) {
+        var emptyMessage = $('<div/>', {
+            id: 'emptyContainerMessage',
+            text: '누가 누가 안 했나 for Web'
+        });
+
+        container.append(emptyMessage);
+    } else {
+        $('#emptyContainerMessage').remove();
+    }
+}
+
 function loadAndCreateFileButtons() {
     db.files.toArray().then(files => {
         files.forEach(file => {
