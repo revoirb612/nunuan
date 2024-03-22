@@ -28,11 +28,34 @@ async function addContent(instanceId) {
     }
 }
 
-function undoRemove(fileIndex, contentButtons) {
-    var lastRemoved = fileData[fileIndex].removedButtons.pop();
-    if (lastRemoved) {
-        var itemButton = lastRemoved.element;
-        contentButtons.appendChild(itemButton);
+async function undoRemove(instanceId) {
+    try {
+        // 데이터베이스에서 인스턴스 가져오기
+        const instance = await db.fileInstances.get(instanceId);
+        if (!instance || instance.removedLines.length === 0) {
+            console.error('No removed content to undo or instance not found');
+            return;
+        }
+
+        // 마지막으로 삭제된 항목 복원
+        var lastRemoved = instance.removedLines.pop();
+        instance.contentLines.push(lastRemoved);
+
+        // 데이터베이스 업데이트
+        await db.fileInstances.update(instanceId, {
+            contentLines: instance.contentLines,
+            removedLines: instance.removedLines
+        });
+
+        // 화면에 복원된 내용 추가
+        var contentButtons = document.querySelector('.file-content[data-instance-id="' + instanceId + '"] .content-buttons');
+        if (contentButtons) {
+            var itemButton = createContentButton(lastRemoved, instanceId);
+            contentButtons.appendChild(itemButton);
+            // 필요한 경우 contentButtons 정렬 가능하게 설정
+        }
+    } catch (error) {
+        console.error('Error undoing remove:', error);
     }
 }
 
