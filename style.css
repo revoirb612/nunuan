@@ -84,8 +84,15 @@ body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
     color: #555;
 }
 
+.file-button-container {
+    display: flex; /* 컨테이너 내 요소를 가로로 배치 */
+    align-items: center; /* 아이템들을 세로 방향으로 중앙 정렬 */
+    gap: 10px; /* 버튼 사이의 간격 */
+}
+
 .file-list-button {
     display: flex;
+    flex-grow: 1; /* 파일 목록 버튼이 가능한 많은 공간을 차지하도록 설정 */
     width: 100%;
     align-items: center;
     text-align: left;
@@ -101,6 +108,12 @@ body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
 .file-list-button i {
     font-size: 24px;
     margin-right: 10px;
+}
+
+.delete-file-button {
+    cursor: pointer; /* 마우스 오버 시 커서 변경 */
+    background-color: transparent; /* 배경색 제거 */
+    border: none; /* 테두리 제거 */
 }
 
 /* 메인 컨텐츠 스타일 */
