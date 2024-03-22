@@ -119,7 +119,7 @@ function createIconButtonContainer(instanceId) {
         {icon: 'fa-plus', label: '내용 추가', onClick: () => {}},  // addContent(fileIndex, contentButtons)
         {icon: 'fa-undo-alt', label: '되돌리기', onClick: () => {}},  // undoRemove(fileIndex, contentButtons)
         {icon: 'fa-file-export', label: '내보내기', onClick: () => {}},  // exportToFile(contentButtons, fileData[fileIndex].file.name, fileIndex)
-        {icon: 'fa-trash', label: '이 복사본 삭제', onClick: () => {}}  // deleteFileContent
+        {icon: 'fa-trash', label: '이 복사본 삭제', onClick: () => deleteFileContent(instanceId)},
     ];
 
     // Create an icon button
