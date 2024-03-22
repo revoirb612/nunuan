@@ -119,7 +119,7 @@ function createIconButtonContainer(instanceId) {
     // 버튼 정보 및 클릭 이벤트 핸들러를 배열로 정의
     var buttonsInfo = [
         {icon: 'fa-plus', label: '내용 추가', onClick: () => addContent(instanceId)},
-        {icon: 'fa-undo-alt', label: '되돌리기', onClick: () => undoRemove(instaceId)},
+        {icon: 'fa-undo-alt', label: '되돌리기', onClick: () => undoRemove(instanceId)},
         {icon: 'fa-file-export', label: '내보내기', onClick: () => {}},  // exportToFile(contentButtons, fileData[fileIndex].file.name, fileIndex)
         {icon: 'fa-trash', label: '이 복사본 삭제', onClick: () => deleteFileContent(instanceId)},
     ];
