@@ -44,7 +44,7 @@ async function deleteFileContent(instanceId) {
         console.log("Instance deleted successfully:", instanceId);
 
         // 화면에서 해당 file-content 클래스 요소 삭제
-        var fileContentDiv = this.closest('.file-content');
+        var fileContentDiv = document.querySelector('.file-content[data-instance-id="' + instanceId + '"]');
         if (fileContentDiv) {
             fileContentDiv.remove();
         }
