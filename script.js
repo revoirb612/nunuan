@@ -30,7 +30,6 @@ async function displayFileContent(instanceId) {
     checkFileContentsContainer(); // Check and update message after adding content
 }
 
-
 async function createFileHeader(instanceId) {
     const instance = await db.fileInstances.get(instanceId);
     if (!instance) {
@@ -46,7 +45,19 @@ async function createFileHeader(instanceId) {
     textInput.value = instance.customFileName;
     textInput.className = 'file-name-input';
 
-    // 파일 이름 변경 로직 필요시 여기에 추가
+    // 파일 이름 변경 로직
+    textInput.addEventListener('change', async (event) => {
+        const newFileName = event.target.value;
+        if (newFileName && newFileName !== instance.customFileName) {
+            try {
+                // 데이터베이스에서 인스턴스의 파일 이름 업데이트
+                await db.fileInstances.update(instanceId, { customFileName: newFileName });
+                console.log("File name updated successfully:", newFileName);
+            } catch (error) {
+                console.error("Error updating file name:", error);
+            }
+        }
+    });
 
     fileInputDiv.appendChild(textInput);
     return fileInputDiv;
