@@ -92,7 +92,32 @@
 
             // Load and create buttons for all files stored in the database
             loadAndCreateFileButtons();
+
+            // Load and display all file instances
+            loadAndDisplayFileInstances();
         });
+
+        function loadAndCreateFileButtons() {
+            db.files.toArray().then(files => {
+                files.forEach(file => {
+                    var button = createFileButton(file.id);
+                    document.getElementById('fileButtons').appendChild(button);
+                });
+            }).catch(error => {
+                console.error("Error loading files: ", error);
+            });
+        }
+        
+        async function loadAndDisplayFileInstances() {
+            try {
+                const instances = await db.fileInstances.toArray();
+                for (const instance of instances) {
+                    await displayFileContent(instance.id);
+                }
+            } catch (error) {
+                console.error("Error displaying file instances: ", error);
+            }
+        }
     </script>
     <script src="onclick.js"></script>
     <script src="script.js"></script>
