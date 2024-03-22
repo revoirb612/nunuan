@@ -1,35 +1,3 @@
-function setupFileInputChangeEvent() {
-    document.getElementById('fileInput').addEventListener('change', function (event) {
-        Array.from(event.target.files).forEach(function (file) {
-            // 파일 타입 검사: 텍스트 파일인지 확인
-            if (file.type === 'text/plain') {
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    // 파일의 내용을 읽은 후, 해당 내용을 줄 단위로 lines 배열에 저장합니다.
-                    const lines = e.target.result.split(/\r\n|\n/); // 파일 내용을 줄 단위로 분리하여 배열로 저장
-
-                    const fileDataToStore  = {
-                        name: file.name,
-                        type: file.type,
-                        size: file.size,
-                        lines: lines // 줄 단위로 처리된 파일 내용
-                    };
-
-                    // IndexedDB에 파일 메타데이터와 내용을 저장하고, 생성된 ID를 가져옵니다.
-                    const fileId = await db.files.add(fileDataToStore);
-
-                    // 생성된 fileId를 사용하여 UI에 파일 버튼 생성 및 추가
-                    var fileButton = createFileButton(fileId); // fileId를 인자로 전달
-                    document.getElementById('fileButtons').appendChild(fileButton);
-                };
-                reader.readAsText(file); // 파일을 읽습니다.
-            } else {
-                console.error('The file is not a text/plain type.');
-            }
-        });
-    });
-}
-
 function createFileButton(fileId) {
     var button = document.createElement('button');
 
