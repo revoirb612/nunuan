@@ -37,10 +37,21 @@ function exportToFile(contentButtons, defaultFileName, fileIndex) {
     URL.revokeObjectURL(url);
 }
 
-function deleteFileContent() {
-    var fileContentDiv = this.closest('.file-content');
-    if (fileContentDiv) {
-        fileContentDiv.remove();
+async function deleteFileContent(instanceId) {
+    try {
+        // 데이터베이스에서 해당 인스턴스 데이터 삭제
+        await db.fileInstances.delete(instanceId);
+        console.log("Instance deleted successfully:", instanceId);
+
+        // 화면에서 해당 file-content 클래스 요소 삭제
+        var fileContentDiv = document.querySelector('.file-content[data-instance-id="' + instanceId + '"]');
+        if (fileContentDiv) {
+            fileContentDiv.remove();
+        }
+
+        // 컨텐츠 컨테이너가 비었는지 확인하고, 필요한 UI 업데이트
+        checkFileContentsContainer();
+    } catch (error) {
+        console.error("Error deleting file content: ", error);
     }
-    checkFileContentsContainer();
 }
