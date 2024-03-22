@@ -1,6 +1,7 @@
 async function displayFileContent(instanceId) {
     const fileContentDiv = document.createElement('div');
     fileContentDiv.className = 'file-content';
+    fileContentDiv.setAttribute('data-instance-id', instanceId); // 인스턴스 ID를 속성으로 추가
 
     // 헤더 만들기
     var fileHeader = await createFileHeader(instanceId);
@@ -28,6 +29,7 @@ async function displayFileContent(instanceId) {
     document.getElementById('fileContentsContainer').appendChild(fileContentDiv);
     checkFileContentsContainer(); // Check and update message after adding content
 }
+
 
 async function createFileHeader(instanceId) {
     const instance = await db.fileInstances.get(instanceId);
