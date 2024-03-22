@@ -12,17 +12,22 @@ function downloadFile(filename, content) {
 
 function createFileButton(fileId) {
     var buttonContainer = document.createElement('div');
+    buttonContainer.className = 'file-button-container'; // 스타일 클래스 적용
+    
     var button = document.createElement('button');
+    button.className = 'file-list-button'; // 스타일 클래스 적용
+
     var deleteButton = document.createElement('button');
+    deleteButton.className = 'delete-file-button'; // 스타일 클래스 적용
 
     // IndexedDB에서 fileId를 사용하여 파일 정보 검색
     db.files.get(fileId).then(file => {
         var fileNameWithoutExtension = file.name.replace(/\.[^/.]+$/, "");
+        
         var icon = document.createElement('i');
         icon.className = 'fas fa-file-alt';
-
         var textSpan = document.createElement('span');
-        textSpan.textContent = fileNameWithoutExtension;
+        textSpan.textContent = ' ' + fileNameWithoutExtension; // 아이콘과 텍스트 사이 간격 조정
 
         button.appendChild(icon);
         button.appendChild(textSpan);
@@ -38,9 +43,12 @@ function createFileButton(fileId) {
             }
         };
 
-        // 파일 삭제 버튼 설정
-        deleteButton.textContent = 'Delete';
-        deleteButton.className = 'delete-file-button';
+        // 삭제 버튼에 아이콘 적용
+        var deleteIcon = document.createElement('i');
+        deleteIcon.className = 'fas fa-trash';
+        deleteButton.appendChild(deleteIcon);
+
+        // 파일 삭제 이벤트
         deleteButton.onclick = async function() {
             try {
                 await db.files.delete(fileId);
@@ -51,9 +59,8 @@ function createFileButton(fileId) {
             }
         };
 
-        button.classList.add('file-list-button');
         buttonContainer.appendChild(button);
-        buttonContainer.appendChild(deleteButton); // 삭제 버튼을 버튼 컨테이너에 추가
+        buttonContainer.appendChild(deleteButton); // 삭제 버튼을 컨테이너에 추가
     });
 
     return buttonContainer; // buttonContainer 반환
