@@ -64,6 +64,7 @@
         <a href="https://indischool.com/boards/libClass/37370017" target="_blank">?</a>
     </div>
     
+    <script src="init.js"></script>
     <script src="sidebar.js"></script>
     <script src="instance.js"></script>
     <script src="extras.js"></script>
@@ -96,28 +97,6 @@
             // Load and display all file instances
             loadAndDisplayFileInstances();
         });
-
-        function loadAndCreateFileButtons() {
-            db.files.toArray().then(files => {
-                files.forEach(file => {
-                    var button = createFileButton(file.id);
-                    document.getElementById('fileButtons').appendChild(button);
-                });
-            }).catch(error => {
-                console.error("Error loading files: ", error);
-            });
-        }
-        
-        async function loadAndDisplayFileInstances() {
-            try {
-                const instances = await db.fileInstances.toArray();
-                for (const instance of instances) {
-                    await displayFileContent(instance.id);
-                }
-            } catch (error) {
-                console.error("Error displaying file instances: ", error);
-            }
-        }
     </script>
     <script src="onclick.js"></script>
     <script src="script.js"></script>
