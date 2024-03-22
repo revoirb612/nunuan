@@ -59,26 +59,38 @@ async function undoRemove(instanceId) {
     }
 }
 
-function exportToFile(contentButtons, defaultFileName, fileIndex) {
-    var customFileName = fileData[fileIndex].customFileName || defaultFileName;
+async function exportToFile(instanceId) {
+    try {
+        const instance = await db.fileInstances.get(instanceId);
+        if (!instance) {
+            console.error('Instance not found');
+            return;
+        }
 
-    // 파일 이름에 확장자가 없으면 '.txt'를 추가
-    if (!customFileName.endsWith('.txt')) {
-        customFileName += '.txt';
-    }
+        // 파일 이름 설정
+        var customFileName = instance.customFileName || 'Untitled';
 
-    var items = [];
-    for (var i = 0; i < contentButtons.children.length; i++) {
-        var itemButton = contentButtons.children[i];
-        items.push(itemButton.querySelector('button').textContent);
+        // 파일 이름에 확장자가 없으면 '.txt'를 추가
+        if (!customFileName.endsWith('.txt')) {
+            customFileName += '.txt';
+        }
+
+        // 인스턴스의 contentLines 배열에서 텍스트 추출
+        var contentText = instance.contentLines.join('\n');
+        var blob = new Blob([contentText], { type: 'text/plain' });
+        var url = URL.createObjectURL(blob);
+
+        // 사용자가 파일을 다운로드할 수 있게 링크 생성
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = customFileName;
+        document.body.appendChild(a); // Firefox에서는 a 요소가 문서에 포함되어 있어야 함
+        a.click();
+        document.body.removeChild(a); // 사용 후 a 요소 제거
+        URL.revokeObjectURL(url); // 생성된 URL 해제
+    } catch (error) {
+        console.error('Error exporting to file:', error);
     }
-    var blob = new Blob([items.join('\n')], { type: 'text/plain' });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = customFileName;
-    a.click();
-    URL.revokeObjectURL(url);
 }
 
 async function deleteFileContent(instanceId) {
