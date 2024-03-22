@@ -48,31 +48,39 @@ function setupFileInputChangeEvent() {
     });
 }
 
-// Function to check if fileContentsContainer is empty and display a message
 function checkFileContentsContainer() {
     var container = $("#fileContentsContainer");
-    var emptyMessageContainer = $("#emptyContainerMessage");
-    var copyrightContainer = $("#copyright");
-    
-    if (container.children().length === 0 && emptyMessageContainer.length === 0) {
-        emptyMessageContainer = $('<div/>', {
-            id: 'emptyContainerMessage',
+    if (container.children().length === 0) {
+        // 기존 메시지와 저작권 정보 제거
+        $('#emptyContainerMessage').remove();
+        $('#copyrightContainer').remove();
+
+        // 새로운 메시지 컨테이너 생성
+        var emptyMessageContainer = $('<div/>', { id: 'emptyContainerMessage' });
+        var emptyMessageText = $('<div/>', {
             text: '누가 누가 안 했나 for Web'
         });
-        container.append(emptyMessageContainer);
-    }
-    
-    if (container.children().length === 0 && copyrightContainer.length === 0) {
-        copyrightContainer = $('<div/>', {
-            id: 'copyright',
+
+        // 저작권 정보 컨테이너 추가
+        var copyrightContainer = $('<div/>', {
+            id: 'copyrightContainer', // 저작권 정보를 담을 별도의 컨테이너
+            class: 'copyright-info', // 스타일링을 위한 클래스 추가
             html: '&copy; 2023-2024<a href="https://revoirb612.notion.site/com-b57409d4fba84c17b29b13c2a90293d2?pvs=4" target="_blank"> 홍승일</a> All Rights Reserved.'
         });
+
+        // 메시지 컨테이너에 텍스트 추가
+        emptyMessageContainer.append(emptyMessageText);
+        container.append(emptyMessageContainer);
+
+        // 컨테이너에 저작권 정보 컨테이너 추가
         container.append(copyrightContainer);
-    } else if (container.children().length > 0) {
-        emptyMessageContainer.remove();
-        copyrightContainer.remove();
+    } else {
+        $('#emptyContainerMessage').remove(); // 컨테이너에 내용이 있으면 메시지 제거
+        $('#copyrightContainer').remove(); // 컨테이너에 내용이 있으면 저작권 정보 컨테이너 제거
     }
 }
+
+
 
 function loadAndCreateFileButtons() {
     db.files.toArray().then(files => {
