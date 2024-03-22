@@ -59,6 +59,32 @@ async function undoRemove(instanceId) {
     }
 }
 
+async function cloneToFilesStore(instanceId) {
+    try {
+        const instance = await db.fileInstances.get(instanceId);
+        if (!instance) {
+            console.error('Instance not found');
+            return;
+        }
+        // 현재 인스턴스의 내용을 files 스토어에 추가
+        const newFileId = await db.files.add({
+            name: instance.customFileName,
+            type: 'text/plain',
+            size: 0,
+            lines: instance.contentLines,
+        });
+        console.log("File cloned to files store with new ID:", newFileId);
+
+        // 새로운 fileButton 생성 및 화면에 추가 로직
+        var newFileButton = createFileButton(newFileId);
+        document.getElementById('fileButtons').appendChild(newFileButton);
+        console.log("New file button added to the UI.");
+    } catch (error) {
+        console.error("Error cloning to files store and adding new file button:", error);
+    }
+}
+
+
 async function exportToFile(instanceId) {
     try {
         const instance = await db.fileInstances.get(instanceId);
