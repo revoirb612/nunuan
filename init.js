@@ -59,7 +59,7 @@ function checkFileContentsContainer() {
         // 새로운 메시지 컨테이너 생성
         var emptyMessageContainer = $('<div/>', { id: 'emptyContainerMessage' });
         var emptyMessageText = $('<div/>', {
-            text: '누가 누가 안 했나 for Web'
+            text: '누가 누가 안 했나 for Pedamint'
         });
 
         // 메시지 컨테이너에 텍스트 추가
