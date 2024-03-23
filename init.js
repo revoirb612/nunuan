@@ -49,8 +49,9 @@ function setupFileInputChangeEvent() {
 }
 
 function checkFileContentsContainer() {
+    var mainContent = $("#main-content");
     var container = $("#fileContentsContainer");
-    if (container.children().length === 0) {
+    if (container.children().length === 0 && $("#emptyContainerMessage").length === 0) {
         // 기존 메시지와 저작권 정보 제거
         $('#emptyContainerMessage').remove();
         $('#copyrightContainer').remove();
@@ -70,17 +71,15 @@ function checkFileContentsContainer() {
 
         // 메시지 컨테이너에 텍스트 추가
         emptyMessageContainer.append(emptyMessageText);
-        container.append(emptyMessageContainer);
-
-        // 컨테이너에 저작권 정보 컨테이너 추가
-        container.append(copyrightContainer);
-    } else {
-        $('#emptyContainerMessage').remove(); // 컨테이너에 내용이 있으면 메시지 제거
-        $('#copyrightContainer').remove(); // 컨테이너에 내용이 있으면 저작권 정보 컨테이너 제거
+        // main-content에 메시지와 저작권 정보 컨테이너 추가
+        mainContent.append(emptyMessageContainer);
+        mainContent.append(copyrightContainer);
+    } else if (container.children().length > 0) {
+        // 컨테이너에 내용이 있으면 메시지와 저작권 정보 제거
+        $('#emptyContainerMessage').remove();
+        $('#copyrightContainer').remove();
     }
 }
-
-
 
 function loadAndCreateFileButtons() {
     db.files.toArray().then(files => {
