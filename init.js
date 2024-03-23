@@ -54,7 +54,7 @@ function checkFileContentsContainer() {
     if (container.children().length === 0 && $("#emptyContainerMessage").length === 0) {
         // 기존 메시지와 저작권 정보 제거
         $('#emptyContainerMessage').remove();
-        $('#copyrightContainer').remove();
+        $('#copyright').remove();
 
         // 새로운 메시지 컨테이너 생성
         var emptyMessageContainer = $('<div/>', { id: 'emptyContainerMessage' });
@@ -62,22 +62,28 @@ function checkFileContentsContainer() {
             text: '누가 누가 안 했나 for Web'
         });
 
-        // 저작권 정보 컨테이너 추가
-        var copyrightContainer = $('<div/>', {
-            id: 'copyrightContainer', // 저작권 정보를 담을 별도의 컨테이너
-            class: 'copyright-info', // 스타일링을 위한 클래스 추가
-            html: '&copy; 2023-2024<a href="https://revoirb612.notion.site/com-b57409d4fba84c17b29b13c2a90293d2?pvs=4" target="_blank"> 홍승일</a> All Rights Reserved.'
-        });
-
         // 메시지 컨테이너에 텍스트 추가
         emptyMessageContainer.append(emptyMessageText);
-        // main-content에 메시지와 저작권 정보 컨테이너 추가
+        // main-content에 메시지 컨테이너 추가
         mainContent.append(emptyMessageContainer);
+
+        // 저작권 정보 컨테이너 추가
+        var copyrightContainer = $('<div/>', {
+            id: 'copyright',
+            html: '<span class="text-muted">Copyright &copy; 2023-2024 </span>' +
+                  '<a href="https://linktr.ee/revoirb612" target="_blank">홍쌤</a>' +
+                  '<span class="text-muted"> ― </span>' +
+                  '<a href="/">이용약관</a>' +
+                  '<span class="text-muted"> ― </span>' +
+                  '<a href="/">개인정보 처리방침</a>'
+        });
+
+        // main-content에 저작권 정보 컨테이너 추가
         mainContent.append(copyrightContainer);
     } else if (container.children().length > 0) {
         // 컨테이너에 내용이 있으면 메시지와 저작권 정보 제거
         $('#emptyContainerMessage').remove();
-        $('#copyrightContainer').remove();
+        $('#copyright').remove();
     }
 }
 
