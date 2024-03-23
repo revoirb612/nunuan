@@ -132,6 +132,7 @@ body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
     text-align: center;
     width: 65%;
     margin: 0 auto;
+    padding: 10px;
 }
 
 .file-content {
