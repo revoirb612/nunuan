@@ -246,13 +246,6 @@ body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
     padding: 10px 0;
 }
 
-#copyright {
-    text-align: center;
-    color: #fff;
-    font-size: 14px;
-    padding: 10px 0;
-}
-
 #emptyContainerMessage {
     user-select: none;
     position: fixed;
@@ -263,15 +256,16 @@ body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
     z-index: 1000; /* 낮은 z-index 값으로 emptyContainerMessage를 하위 레이어에 위치시킴 */
 }
 
-#copyrightContainer {
+#copyright {
     font-size: 14px; /* 폰트 크기 */
-    user-select: none;
-    position: fixed;
+    user-select: none; /* 사용자가 텍스트를 선택할 수 없도록 설정 */
+    position: fixed; /* 화면 하단에 고정 */
     bottom: 0;
     left: 0;
     right: 0;
-    text-align: center;
-    border-top: 1px solid #ccc;
+    text-align: center; /* 텍스트 중앙 정렬 */
+    border-top: 1px solid #ccc; /* 상단에 경계선 추가 */
     padding: 10px 0; /* 상하 패딩 */
-    z-index: 1000; /* 낮은 z-index 값으로 emptyContainerMessage를 하위 레이어에 위치시킴 */
+    z-index: 1000; /* 다른 요소들 위에 표시되도록 z-index 설정 */
+    color: #fff; /* 폰트 색상 */
 }
