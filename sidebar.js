@@ -1,15 +1,3 @@
-function downloadFile(filename, content) {
-    var blob = new Blob([content], {type: "text/plain"});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}
-
 function createFileButton(fileId) {
     var buttonContainer = document.createElement('div');
     buttonContainer.className = 'file-button-container'; // 스타일 클래스 적용
