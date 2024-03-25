@@ -71,7 +71,8 @@ document.getElementById('example-file-button').onclick = async function () {
         // 가상의 데이터 생성
         var fileId = 2024;
         var fileName = "제목을 변경할 수 있습니다";
-        var fileLines = ["이 버튼을 클릭하면 버튼이 사라집니다", 
+        var fileLines = ["이 버튼을 클릭하면 버튼이 사라집니다",
+                         "사라진 버튼의 내용은 클립보드에 저장됩니다",
                          "더하기 버튼을 눌러서 버튼을 추가해보세요", 
                          "되돌리기 버튼으로 삭제된 버튼을 복구시켜 보세요",
                          "북마크 버튼은 복사본의 현재 상태를 템플릿 버튼으로 저장시킬 수 있어요",
