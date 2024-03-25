@@ -65,3 +65,21 @@ function createFileButton(fileId) {
 
     return buttonContainer; // buttonContainer 반환
 }
+
+document.getElementById('example-file-button').onclick = async function () {
+    try {
+        // 가상의 데이터 생성
+        var fileId = "20130613";
+        var fileName = "예시 템플릿.txt";
+        var fileLines = ["진", "슈가", "제이홉", "RM", "지민", "뷔", "정국"];
+
+        // 가상의 instanceId 생성 또는 업데이트 - 실제 구현에서는 이 부분을 적절히 조정해야 합니다.
+        var instanceId = await createOrUpdateFileInstance(null, fileId, fileName, fileLines, []);
+        
+        // 파일 내용 표시
+        await displayFileContent(instanceId);
+        console.log("File content displayed successfully");
+    } catch (error) {
+        console.error("Error displaying file content: ", error);
+    }
+};
