@@ -109,11 +109,21 @@ function createContentButton(content, instanceId) {
             // 파일 인스턴스 업데이트
             await createOrUpdateFileInstance(instanceId, instance.originalFileId, instance.customFileName, updatedContentLines, [...instance.removedLines, content]);
 
+            // 클립보드에 내용 복사
+            if (navigator.clipboard && window.isSecureContext) {
+                // 클립보드 API를 사용할 수 있는 경우
+                await navigator.clipboard.writeText(content);
+                console.log("Content copied to clipboard.");
+            } else {
+                // 클립보드 API를 사용할 수 없는 경우
+                console.error("Clipboard API not available.");
+            }
+
             // 페이지에서 아이템 컨테이너 삭제
             itemContainer.remove();
             console.log("Content line removed and instance updated.");
         } catch (err) {
-            console.error("Failed to remove content line:", err);
+            console.error("Failed to remove content line or copy to clipboard:", err);
         }
     };
 
@@ -121,7 +131,6 @@ function createContentButton(content, instanceId) {
     itemContainer.appendChild(button);
     return itemContainer;
 }
-
 
 function createIconButtonContainer(instanceId) {
     var iconButtonContainer = document.createElement('div');
