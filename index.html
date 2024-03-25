@@ -22,14 +22,9 @@
     <section>
         <div id="sidebar" class="bg-dark">
             <h4 class="py-3 text-primary">안녕하세요!</h4>
-            <div class="file-button-container">
-                <button class="file-list-button" id="example-file-button">
-                    <i class="fas fa-file-alt"></i>
-                    <span> 시작하기(튜토리얼 템플릿)</span>
-                </button>
-            </div>
             <h4 class="py-2">템플릿 추가하기</h4>
             <input type="file" id="fileInput" multiple>
+            <h6 class="py-6">&nbsp;</h6>
             <ul>
                 <li>
                     <a href="#" onclick="downloadFile('학생 명렬표.txt', '학생1\n학생2\n학생3\n학생4\n학생5\n학생6\n학생7\n학생8\n학생9\n학생10')">학생 명렬표.txt</a>
@@ -38,8 +33,13 @@
                     <a href="#" onclick="downloadFile('하루 루틴.txt', '안내장 회수\n숙제 검사\n하루 일과 공지\n학교종이 발송')">하루 루틴.txt</a>
                 </li>
             </ul>
-            <h6 class="py-6">&nbsp;</h6>
             <h4 class="py-2">복사본 생성하기</h4>
+            <div class="file-button-container">
+                <button class="file-list-button" id="example-file-button">
+                    <i class="fas fa-file-alt"></i>
+                    <span> 시작하기(튜토리얼 템플릿)</span>
+                </button>
+            </div>
             <div id="fileButtons"></div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn">
