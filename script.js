@@ -131,7 +131,7 @@ function createIconButtonContainer(instanceId) {
     var buttonsInfo = [
         {icon: 'fa-plus', label: '내용 추가', onClick: () => addContent(instanceId)},
         {icon: 'fa-undo-alt', label: '되돌리기', onClick: () => undoRemove(instanceId)},
-        {icon: 'fa-t', label: '템플릿으로 저장', onClick: () => cloneToFilesStore(instanceId)},
+        {icon: 'fa-bookmark', label: '템플릿으로 저장', onClick: () => cloneToFilesStore(instanceId)},
         {icon: 'fa-download', label: '텍스트파일 다운로드', onClick: () => exportToFile(instanceId)}, 
         {icon: 'fa-trash', label: '이 복사본 삭제', onClick: () => deleteFileContent(instanceId)},
     ];
