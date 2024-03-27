@@ -71,7 +71,7 @@ function checkFileContentsContainer() {
         var copyrightContainer = $('<div/>', {
             id: 'copyright',
             html: '<span class="text-muted">&copy; 2023-2024 </span>' +
-                  '<a href="https://linktr.ee/revoirb612" target="_blank">홍쌤</a>' +
+                  '<a href="https://linktr.ee/revoirb612" target="_blank">홍승일</a>' +
                   '<span class="text-muted"> All right reserved</span>'
         });
 
