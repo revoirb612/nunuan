@@ -71,7 +71,7 @@ function checkFileContentsContainer() {
             id: 'copyright',
             html: '<span class="text-muted">&copy; 2023-2024 </span>' +
                   '<a href="https://linktr.ee/revoirb612" target="_blank">홍승일</a>' +
-                  '<span class="text-muted"> All right reserved</span>'
+                  '<span class="text-muted"> All right reserved.</span>'
         });
 
         // main-content에 저작권 정보 컨테이너 추가
