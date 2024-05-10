@@ -21,27 +21,42 @@
 <body>
     <section>
         <div id="sidebar" class="bg-dark">
-            <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Frevoirb612.github.io%2Fnunuan%2F&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
+            <a href="https://hits.seeyoufarm.com">
+                <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Frevoirb612.github.io%2Fnunuan%2F&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/>
+            </a>
             <h4 class="py-3 text-primary">안녕하세요!</h4>
-            <h4 class="py-2">템플릿 추가하기</h4>
-            <input type="file" id="fileInput" multiple>
-            <h6 class="py-6">&nbsp;</h6>
-            <ul>
-                <li>
-                    <a href="#" onclick="downloadFile('학생 명렬표.txt', '학생1\n학생2\n학생3\n학생4\n학생5\n학생6\n학생7\n학생8\n학생9\n학생10')">학생 명렬표(예시파일).txt</a>
-                </li>
-                <li>
-                    <a href="#" onclick="downloadFile('하루 루틴.txt', '안내장 회수\n숙제 검사\n하루 일과 공지\n학교종이 발송')">하루 일과(예시파일).txt</a>
-                </li>
-            </ul>
-            <h4 class="py-2">복사본 생성하기</h4>
-            <div class="file-button-container">
-                <button class="file-list-button" id="example-file-button">
-                    <i class="fas fa-file-alt"></i>
-                    <span> 시작하기(튜토리얼 템플릿)</span>
-                </button>
+        
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#templateAdd" aria-expanded="false" aria-controls="templateAdd">
+                템플릿 추가하기
+            </button>
+            <div class="collapse" id="templateAdd">
+                <div class="card card-body">
+                    <input type="file" id="fileInput" multiple>
+                    <ul>
+                        <li>
+                            <a href="#" onclick="downloadFile('학생 명렬표.txt', '학생1\n학생2\n학생3\n학생4\n학생5\n학생6\n학생7\n학생8\n학생9\n학생10')">학생 명렬표(예시파일).txt</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="downloadFile('하루 루틴.txt', '안내장 회수\n숙제 검사\n하루 일과 공지\n학교종이 발송')">하루 일과(예시파일).txt</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div id="fileButtons"></div>
+        
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#copyCreation" aria-expanded="false" aria-controls="copyCreation">
+                복사본 생성하기
+            </button>
+            <div class="collapse" id="copyCreation">
+                <div class="card card-body">
+                    <div class="file-button-container">
+                        <button class="file-list-button" id="example-file-button">
+                            <i class="fas fa-file-alt"></i>
+                            <span> 시작하기(튜토리얼 템플릿)</span>
+                        </button>
+                    </div>
+                    <div id="fileButtons"></div>
+                </div>
+            </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn">
             <i class="fa fa-arrow-right" id="toggleIcon"></i>
