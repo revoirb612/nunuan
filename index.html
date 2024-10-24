@@ -32,54 +32,56 @@
 <body>
     <section>
         <div id="sidebar" class="bg-dark">
-            <div class="d-flex justify-content-left">
+            <div class="fixed-top-center">
+                <h4 class="py-3 mt-2 text-primary title-text">😡누가 누가 안 했나?</h4>
+                <div class="accordion mb-3" id="accordionSidebar">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                템플릿 추가하기
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionSidebar">
+                            <div class="accordion-body">
+                                <input type="file" id="fileInput" multiple>
+                                <ul>
+                                    <li>
+                                        <a href="#" onclick="downloadFile('학생 명렬표.txt', '학생1\n학생2\n학생3\n학생4\n학생5\n학생6\n학생7\n학생8\n학생9\n학생10')">학생 명렬표(예시파일).txt</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onclick="downloadFile('하루 루틴.txt', '안내장 회수\n숙제 검사\n하루 일과 공지\n학교종이 발송')">하루 일과(예시파일).txt</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                복사본 생성하기
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
+                            <div class="accordion-body">
+                                <div class="file-button-container">
+                                    <button class="file-list-button" id="example-file-button">
+                                        <i class="fas fa-file-alt"></i>
+                                        <span> 시작하기(튜토리얼 템플릿)</span>
+                                    </button>
+                                </div>
+                                <div id="fileButtons"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="#" id="resetDatabase" class="text-decoration-none">데이터 초기화</a>
+                </div>
+            </div>
+            <div class="fixed-bottom-center">
                 <a href="https://hits.seeyoufarm.com">
                     <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Frevoirb612.github.io%2Fnunuan%2F&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/>
                 </a>
-            </div>
-            <h4 class="py-3 mt-2 text-primary title-text">😡누가 누가 안 했나</h4>
-            <div class="accordion mb-3" id="accordionSidebar">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            템플릿 추가하기
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionSidebar">
-                        <div class="accordion-body">
-                            <input type="file" id="fileInput" multiple>
-                            <ul>
-                                <li>
-                                    <a href="#" onclick="downloadFile('학생 명렬표.txt', '학생1\n학생2\n학생3\n학생4\n학생5\n학생6\n학생7\n학생8\n학생9\n학생10')">학생 명렬표(예시파일).txt</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="downloadFile('하루 루틴.txt', '안내장 회수\n숙제 검사\n하루 일과 공지\n학교종이 발송')">하루 일과(예시파일).txt</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            복사본 생성하기
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
-                        <div class="accordion-body">
-                            <div class="file-button-container">
-                                <button class="file-list-button" id="example-file-button">
-                                    <i class="fas fa-file-alt"></i>
-                                    <span> 시작하기(튜토리얼 템플릿)</span>
-                                </button>
-                            </div>
-                            <div id="fileButtons"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a href="#" id="resetDatabase" class="text-decoration-none">데이터 초기화</a>
             </div>
         </div>
         <button type="button" id="sidebarCollapse" class="btn">

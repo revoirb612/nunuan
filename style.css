@@ -40,6 +40,9 @@ body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 1001; /* 높은 z-index 값으로 사이드바를 상위 레이어에 위치시킴 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 상단과 하단에 요소를 배치 */
 }
 
 #sidebar.active {
@@ -276,4 +279,9 @@ body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
     padding: 10px 0; /* 상하 패딩 */
     z-index: 1000; /* 다른 요소들 위에 표시되도록 z-index 설정 */
     color: #fff; /* 폰트 색상 */
+}
+
+.fixed-bottom-center {
+    margin-bottom: 10px; /* 하단 여백 */
+    text-align: center; /* 가운데 정렬 */
 }
